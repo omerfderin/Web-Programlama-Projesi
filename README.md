@@ -99,23 +99,23 @@ src/
 ## 1. Model Katmanı
 
 ### Model Katmanı (Java Beans)
-
+```
 Book: Kitap bilgilerini tutan sınıf
 User: Kullanıcı bilgilerini tutan sınıf
 Review: Kitap yorumlarını tutan sınıf
-
+```
 ### DAO (Data Access Object) Sınıfları
-
+```
 BookDAO: Kitap verilerinin veritabanı işlemleri
 UserDAO: Kullanıcı verilerinin veritabanı işlemleri
 ReviewDAO: Yorum verilerinin veritabanı işlemleri
-
+```
 ## 2. View Katmanı
 
 View katmanı, kullanıcı arayüzünü oluşturan JSP sayfalarını içeriyor
 
 ### JSP Sayfaları
-
+```
 books.jsp: Kitap listesi sayfası
 bookDetail.jsp: Kitap detayları sayfası
 newBook.jsp: Kitap ekleme sayfası
@@ -123,13 +123,13 @@ login.jsp: Giriş formu
 register.jsp: Kayıt formu
 404.jsp: 404 hatasında gösterilecek sayfa
 500.jsp: 500 hatasında gösterilecek sayfa
-
+```
 ## 3. Controller Katmanı
 
 Controller katmanı, kullanıcı isteklerini işleyen Servlet sınıflarını içeriyor
 
 ### Servlet Sınıfları
-
+```
 AddBookServlet: Kitapların eklenmesinden sorumlu servlet
 AddReviewServlet: Kitaplara yorumların eklenmesinden sorumlu servlet
 BookDetailServlet: Kitap bilgilerinin görüntülenmesinden sorumlu servlet
@@ -137,17 +137,17 @@ BookListServlet: Kitapların ana sayfada görüntülenmesinden sorumlu servlet
 LoginServlet: Kullanıcının girişinden sorumlu servlet
 LogoutServlet: Kullanıcının çıkış yapmasından sorumlu servlet
 RegisterServlet: Kullanıcının kaydından sorumlu servlet
-
+```
 ## MVC Akışı Örneği
 
 Kullanıcı bir kitap eklemek istediğinde
-
+```
 View (newBook.jsp) üzerinden form doldurulur
 Controller (AddBookServlet) form verilerini alır
 Model (Book ve BookDAO) verileri işler ve kaydeder
 Controller kullanıcıyı kitap listesine yönlendirir
 View (books.jsp) güncel listeyi gösterir
-
+```
 # Kullanıcı Senaryoları
 
 ## 1. Kullanıcı Kaydı ve Girişi
