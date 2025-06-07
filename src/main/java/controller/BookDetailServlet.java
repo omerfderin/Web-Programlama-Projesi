@@ -20,6 +20,10 @@ public class BookDetailServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+    	request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+    	
         String pathInfo = request.getPathInfo();
         if (pathInfo == null || pathInfo.equals("/")) {
             response.sendRedirect(request.getContextPath() + "/books");
@@ -46,7 +50,7 @@ public class BookDetailServlet extends HttpServlet {
             
             request.setAttribute("book", book);
             request.setAttribute("reviews", reviews);
-            request.getRequestDispatcher("/jsp/kitapDetay.jsp").forward(request, response);
+            request.getRequestDispatcher("/jsp/bookDetail.jsp").forward(request, response);
             
         } catch (NumberFormatException e) {
             response.sendRedirect(request.getContextPath() + "/books");

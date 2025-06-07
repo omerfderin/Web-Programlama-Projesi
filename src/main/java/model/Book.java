@@ -10,6 +10,7 @@ public class Book {
     private int userId;
     private Timestamp createdAt;
     private double averageRating;
+    private String coverImage;
     
     public Book() {}
     
@@ -20,7 +21,6 @@ public class Book {
         this.userId = userId;
     }
     
-    // Getters and Setters
     public int getId() {
         return id;
     }
@@ -75,5 +75,13 @@ public class Book {
     
     public void setAverageRating(double averageRating) {
         this.averageRating = averageRating;
+    }
+    
+    public String getCoverImage() {
+        return coverImage;
+    }
+    
+    public void setCoverImage(String coverImage) {
+        this.coverImage = coverImage;
     }
 } 

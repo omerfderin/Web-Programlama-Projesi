@@ -9,7 +9,7 @@ public class Review {
     private String comment;
     private int rating;
     private Timestamp createdAt;
-    private String username; // Yorumu yapan kullanıcının adı
+    private String username;
     
     public Review() {}
     
@@ -20,7 +20,6 @@ public class Review {
         this.rating = rating;
     }
     
-    // Getters and Setters
     public int getId() {
         return id;
     }

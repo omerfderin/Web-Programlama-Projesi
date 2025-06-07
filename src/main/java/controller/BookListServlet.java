@@ -10,12 +10,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//@WebServlet("/books")
+@WebServlet("/books")
 public class BookListServlet extends HttpServlet {
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    	
+    	request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
         
         String search = request.getParameter("search");
         List<Book> books;
@@ -27,6 +31,6 @@ public class BookListServlet extends HttpServlet {
         }
         
         request.setAttribute("books", books);
-        request.getRequestDispatcher("/jsp/kitaplar.jsp").forward(request, response);
+        request.getRequestDispatcher("/jsp/books.jsp").forward(request, response);
     }
 } 

@@ -16,11 +16,14 @@ public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+    	request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+    	
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String email = request.getParameter("email");
         
-        // Validasyon
         if (username == null || username.trim().isEmpty() ||
             password == null || password.trim().isEmpty() ||
             email == null || email.trim().isEmpty()) {
@@ -30,7 +33,6 @@ public class RegisterServlet extends HttpServlet {
             return;
         }
         
-        // Kullanıcı adı ve email kontrolü
         if (UserDAO.isUsernameExists(username)) {
             request.setAttribute("error", "Bu kullanıcı adı zaten kullanılıyor!");
             request.getRequestDispatcher("/jsp/register.jsp").forward(request, response);
@@ -43,7 +45,6 @@ public class RegisterServlet extends HttpServlet {
             return;
         }
         
-        // Yeni kullanıcı oluştur
         User user = new User(username, password, email);
         
         if (UserDAO.register(user)) {
@@ -58,6 +59,10 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    	
+    	request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
         request.getRequestDispatcher("/jsp/register.jsp").forward(request, response);
     }
 } 

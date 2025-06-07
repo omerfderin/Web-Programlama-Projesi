@@ -1,9 +1,9 @@
 package model;
 
-import util.DBUtil;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import util.DBUtil;
 
 public class BookDAO {
     
@@ -26,6 +26,7 @@ public class BookDAO {
                 book.setUserId(rs.getInt("user_id"));
                 book.setCreatedAt(rs.getTimestamp("created_at"));
                 book.setAverageRating(rs.getDouble("avg_rating"));
+                book.setCoverImage(rs.getString("cover_image"));
                 books.add(book);
             }
         } catch (SQLException e) {
@@ -58,6 +59,7 @@ public class BookDAO {
                     book.setUserId(rs.getInt("user_id"));
                     book.setCreatedAt(rs.getTimestamp("created_at"));
                     book.setAverageRating(rs.getDouble("avg_rating"));
+                    book.setCoverImage(rs.getString("cover_image"));
                     books.add(book);
                 }
             }
@@ -87,6 +89,7 @@ public class BookDAO {
                     book.setUserId(rs.getInt("user_id"));
                     book.setCreatedAt(rs.getTimestamp("created_at"));
                     book.setAverageRating(rs.getDouble("avg_rating"));
+                    book.setCoverImage(rs.getString("cover_image"));
                     return book;
                 }
             }
@@ -97,7 +100,7 @@ public class BookDAO {
     }
     
     public static boolean addBook(Book book) {
-        String sql = "INSERT INTO books (title, author, description, user_id) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO books (title, author, description, user_id, cover_image) VALUES (?, ?, ?, ?, ?)";
         
         try (Connection conn = DBUtil.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -106,6 +109,7 @@ public class BookDAO {
             ps.setString(2, book.getAuthor());
             ps.setString(3, book.getDescription());
             ps.setInt(4, book.getUserId());
+            ps.setString(5, book.getCoverImage());
             
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -118,15 +122,35 @@ public class BookDAO {
         String sql = "DELETE FROM books WHERE id = ? AND user_id = ?";
         
         try (Connection conn = DBUtil.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
             
-            ps.setInt(1, bookId);
-            ps.setInt(2, userId);
+            stmt.setInt(1, bookId);
+            stmt.setInt(2, userId);
             
-            return ps.executeUpdate() > 0;
+            int affectedRows = stmt.executeUpdate();
+            return affectedRows > 0;
+            
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
     }
-} 
+    
+    public static boolean deleteComment(int commentId, int userId) {
+        String sql = "DELETE FROM comments WHERE id = ? AND user_id = ?";
+        
+        try (Connection conn = DBUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setInt(1, commentId);
+            stmt.setInt(2, userId);
+            
+            int affectedRows = stmt.executeUpdate();
+            return affectedRows > 0;
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+}
